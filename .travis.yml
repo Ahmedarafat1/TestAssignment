@@ -17,5 +17,5 @@ deploy:
   file: package.tar.gz
   skip_cleanup: true
   on:
-    tags: true
+#    tags: true
     branch: travis
