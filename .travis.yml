@@ -9,7 +9,7 @@ script:
   - dotnet test 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
   - dotnet build 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
   - dotnet pack -o $TRAVIS_BUILD_DIR/nupkg 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
-  - tar xzf $TRAVIS_BUILD_DIR/package.tar.gz $TRAVIS_BUILD_DIR/build.log $TRAVIS_BUILD_DIR/nupkg
+  - tar czf $TRAVIS_BUILD_DIR/package.tar.gz $TRAVIS_BUILD_DIR/build.log $TRAVIS_BUILD_DIR/nupkg
   
 deploy:
   provider: releases
