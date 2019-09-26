@@ -6,5 +6,5 @@ script:
   - dotnet restore
   - dotnet test --filter FullyQualifiedName~UnitTest1
   - echo "Lint check"
-  - dotnet test --filter FullyQualifiedName~Integration
+  - dotnet test
   - dotnet build
