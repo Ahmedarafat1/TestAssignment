@@ -8,5 +8,13 @@ script:
   - echo "Lint check" 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
   - dotnet test 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
   - dotnet build 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
-  - dotnet pack 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
-#  - tar xzf $TRAVIS_BUILD_DIR/build.log $TRAVIS_BUILD_DIR/HelloWorldSolution $TRAVIS_BUILD_DIR/package-
+  - dotnet pack -o $TRAVIS_BUILD_DIR/nupkg 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
+  - tar xzf $TRAVIS_BUILD_DIR/package.tar.gz $TRAVIS_BUILD_DIR/build.log $TRAVIS_BUILD_DIR/nupkg
+  
+deploy:
+  provider: releases
+  api_key: $ACCESS_TOKEN
+  file: package.tar.gz
+  skip_cleanup: true
+  on:
+    tags: true
