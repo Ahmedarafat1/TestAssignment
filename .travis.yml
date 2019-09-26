@@ -3,8 +3,10 @@ mono: none
 dotnet: 2.2
 solution: HelloWorld.sln
 script:
-  - dotnet restore
-  - dotnet test --filter FullyQualifiedName~UnitTest1
-  - echo "Lint check"
-  - dotnet test
-  - dotnet build
+  - dotnet restore 2>&1 | tee >> $TRAVIS_BUILD_DIR/build.log 
+  - dotnet test --filter FullyQualifiedName~UnitTest1 2>&1 | tee >> $TRAVIS_BUILD_DIR/build.log
+  - echo "Lint check" 2>&1 | tee >> $TRAVIS_BUILD_DIR/build.log
+  - dotnet test 2>&1 | tee >> $TRAVIS_BUILD_DIR/build.log
+  - dotnet build 2>&1 | tee >> $TRAVIS_BUILD_DIR/build.log
+  - dotnet pack 2>&1 | tee >> $TRAVIS_BUILD_DIR/build.log
+#  - tar xzf $TRAVIS_BUILD_DIR/build.log $TRAVIS_BUILD_DIR/HelloWorldSolution $TRAVIS_BUILD_DIR/package-
