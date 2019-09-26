@@ -8,7 +8,7 @@ script:
   - echo "Lint check" 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
   - dotnet test 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
   - dotnet build 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
-  - $TRAVIS_BUILD_DIR/package.sh
+  - sh $TRAVIS_BUILD_DIR/package.sh
   
 deploy:
   provider: releases
