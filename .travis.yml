@@ -4,5 +4,6 @@ dotnet: 2.2
 solution: HelloWorld.sln
 script:
   - dotnet restore
-  - dotnet test
+  - dotnet test --filter FullyQualifiedName~UnitTest1
+  - dotnet test --filter FullyQualifiedName~Integration.Tests
   - dotnet build
