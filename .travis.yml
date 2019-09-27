@@ -17,9 +17,9 @@ script:
   
   
 deploy:
-  provider: releases
+  provider: travis
   api_key: $ACCESS_TOKEN
   file: package.tar.gz
   skip_cleanup: true
   on:
-    branch: Release*
+    branch: travis
