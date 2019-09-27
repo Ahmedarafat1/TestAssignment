@@ -1,0 +1,25 @@
+language: csharp
+mono: none
+dotnet: 2.2
+solution: HelloWorld.sln
+script:
+  - dotnet restore 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log 
+  #Unit Test
+  - dotnet test --filter FullyQualifiedName~UnitTest1 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
+  #Dummy LINT CHECK
+  - echo "Lint check" 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
+  #Integration Test
+  - dotnet test 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
+  #Release Build
+  - dotnet build 2>&1 | tee -a $TRAVIS_BUILD_DIR/build.log
+  #packaging script
+  - sh $TRAVIS_BUILD_DIR/package.sh
+  
+  
+deploy:
+  provider: releases
+  api_key: $ACCESS_TOKEN
+  file: package.tar.gz
+  skip_cleanup: true
+  on:
+    branch: Release*
